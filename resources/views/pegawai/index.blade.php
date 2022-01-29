@@ -22,12 +22,12 @@ $golongan = DB::table('tb_golongan')
 <body>
     <div class="container">
         <div>
-            <h1>Tabel Data Pegawai</h1>
-            <i>digunakan untuk mengelola data pegawai</i>
+            <h1>TABEL DATA PEGAWAI</h1>
+            <i>Digunakan untuk mengelola data pegawai</i>
         </div><br>
-        <div >
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah" style="width:100px;height:30px;">Tambah Data</button>
-            <a href="/pegawai/cetak" class="btn btn-success btn-sm" target="_blank" style="width:100px;height:30px;">CETAK PDF</a><br><br>
+        <div>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah" style="width:100px;height:30px;">TAMBAH</button>
+            <a href="/pegawai/cetak" class="btn btn-success btn-sm" target="_blank" style="width:100px;height:30px;">CETAK</a><br><br>
         </div>
         <div class="content">
             <table width="100%" class="table table-hover" id="datatable">
@@ -52,11 +52,9 @@ $golongan = DB::table('tb_golongan')
                         <td>{{$p->nama_jabatan}}</td>
                         <td>{{$p->nama_unit}}</td>
                         <td>
-                           
-                                <button class="btnEdit btn btn-warning btn-sm" data-bs-target="#modalEdit" data-bs-toggle="modal" data-id="{{ $p->id_pegawai }}" style="width:60px;height:30px;">edit </button>
+                            <button class="btnEdit btn btn-warning btn-sm" data-id="{{ $p->id_pegawai }}" data-bs-target="#modalEdit" data-bs-toggle="modal" style="width:60px;height:30px;"> EDIT </button>
+                            <button class="btnDelete btn btn-sm btn-danger" data-id_pegawai="{{ $p->id_pegawai }}" style="width:60px;height:30px;"> HAPUS </button>
 
-                                <button class="btnDelete btn btn-sm btn-danger" data-id_pegawai="{{ $p->id_pegawai }}" style="width:60px;height:30px;">hapus </button>
-                            
                         </td>
                     </tr>
                     @endforeach
@@ -154,12 +152,11 @@ $golongan = DB::table('tb_golongan')
     </div>
     {!! Form::close() !!}
 
-
     <!-- MODAL DELETE -->
-
     {!! Form::open(['url' => 'pegawai/delete/{$id}']) !!}
     {!! Form::hidden('id_pegawai',null,['id'=>'id_pegawai','class' => 'form-control']) !!}
     {!! Form::close() !!}
+
     <!-- SCRIPT JAVASCRIPT -->
     <script src="{{url('js/jquery351.js')}}"></script>
     <script src="{{url('js/datatables.js')}}"></script>

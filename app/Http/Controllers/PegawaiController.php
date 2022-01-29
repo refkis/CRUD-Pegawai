@@ -77,13 +77,13 @@ class PegawaiController extends Controller
             'id_unit' => $r->id_unit
         );
         DB::table('tb_pegawai')->where('id_pegawai', $r->id_pegawai)->update($data);
-        return redirect('/pegawai')->with('success', true)->with('message', 'Data Berhasil Dihapus');
+        return redirect('/pegawai')->with('success', true)->with('message', 'Data Berhasil Di Update');
     }
 
     function delete($id)
     {
         DB::table('tb_pegawai')->where('id_pegawai', $id)->delete();
-        return redirect('/pegawai')->with('success', true)->with('message', 'Delete');
+        return redirect('/pegawai')->with('success', true)->with('message', 'Data Berhasil Di Hapus');
     }
 
     function datatable()

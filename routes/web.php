@@ -12,8 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Route::post('/postlogin','AuthController@postlogin' );
+Route::get('/login','AuthController@login' );
+Route::get('/logout','AuthController@logout' );
 
 Route::prefix('pegawai')->group(function () {
     Route::get('/', 'PegawaiController@index');
@@ -23,8 +27,4 @@ Route::prefix('pegawai')->group(function () {
     Route::post('/update', 'PegawaiController@update');
     Route::get('/{id}', 'PegawaiController@get');
     Route::get('/delete/{id}', 'PegawaiController@delete');
-
-
-
-
 });
