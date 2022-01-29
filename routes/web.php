@@ -17,8 +17,14 @@ Route::get('/', function () {
 
 Route::prefix('pegawai')->group(function () {
     Route::get('/', 'PegawaiController@index');
-    Route::get('/{id}', 'PegawaiController@get');
+    Route::get('/dt', 'PegawaiController@datatable');
+    Route::get('/cetak', 'PegawaiController@cetak');
     Route::post('/insert', 'PegawaiController@insert');
     Route::post('/update', 'PegawaiController@update');
+    Route::get('/{id}', 'PegawaiController@get');
     Route::get('/delete/{id}', 'PegawaiController@delete');
+
+
+
+
 });

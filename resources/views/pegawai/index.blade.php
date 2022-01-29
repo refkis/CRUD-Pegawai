@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pegawai</title>
+    <link rel="stylesheet" href="{{url('css/datatables.css')}}">
+    <link rel="stylesheet" href="{{url('css/bootstrap513.css')}}">
+</head>
 <?php
 
 $unit = DB::table('tb_unit')->pluck('nama_unit', 'id_unit');
@@ -11,27 +22,16 @@ $golongan = DB::table('tb_golongan')
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pegawai</title>
-    <link rel="stylesheet" href="{{url('css/bootstrap513.css')}}">
-    <link rel="stylesheet" href="{{url('css/datatables.css')}}">
-</head>
-
 <body>
     <div class="container">
         <div>
             <h1>Tabel Data Pegawai</h1>
             <i>digunakan untuk mengelola data pegawai</i>
         </div><br>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah Data</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah Data</button><br><br>
+        <a href="/pegawai/cetak" class="btn btn-primary" target="_blank">CETAK PDF</a><br><br>
         <div class="content">
-            <table width="100%" class="table table-hover">
+            <table width="100%" class="table table-hover" id="datatable">
                 <thead class="">
                     <tr>
                         <td width="5%">ID</td>
@@ -53,11 +53,13 @@ $golongan = DB::table('tb_golongan')
                         <td>{{$p->nama_jabatan}}</td>
                         <td>{{$p->nama_unit}}</td>
                         <td>
+                            <div class="btn-group" role="group">
 
-                            <button class="btnEdit btn btn-warning btn-sm" data-bs-target="#modalEdit" data-bs-toggle="modal" data-id="{{ $p->id_pegawai }}">edit </button>
-
-                            <button class="btnDelete btn btn-sm btn-danger" data-id_pegawai="{{ $p->id_pegawai }}">hapus </button>
-                        </td>
+                                <button class="btnEdit btn btn-warning btn-sm" data-bs-target="#modalEdit" data-bs-toggle="modal" data-id="{{ $p->id_pegawai }}">edit </button>
+                                
+                                <button class="btnDelete btn btn-sm btn-danger" data-id_pegawai="{{ $p->id_pegawai }}">hapus </button>
+                            </div>
+                            </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -162,48 +164,51 @@ $golongan = DB::table('tb_golongan')
     {!! Form::close() !!}
     <!-- SCRIPT JAVASCRIPT -->
     <script src="{{url('js/jquery351.js')}}"></script>
+    <script src="{{url('js/datatables.js')}}"></script>
     <script src="{{url('js/sweetalert.js')}}"></script>
     <script src="{{url('js/bootstrap513.js')}}"></script>
 
 
     <script>
         $(document).ready(function() {
+                    $('#datatable').DataTable();
+                        
 
-            $('.btnEdit').on('click', function() {
+                            $('.btnEdit').on('click', function() {
 
-                var id = $(this).data('id');
-                console.log(id)
-                $.get('pegawai/' + id, function(data) {
-                    console.log(data.data.nama_pegawai)
-                    $('#id_pegawai').val(data.data.id_pegawai);
-                    $('#nip_pegawai').val(data.data.nip_pegawai);
-                    $('#nama_pegawai').val(data.data.nama_pegawai);
-                    $('#id_golongan').val(data.data.id_golongan);
-                    $('#id_jabatan').val(data.data.id_jabatan);
-                    $('#id_unit').val(data.data.id_unit);
-                })
-            });
+                                var id = $(this).data('id');
+                                console.log(id)
+                                $.get('pegawai/' + id, function(data) {
+                                    console.log(data.data.nama_pegawai)
+                                    $('#id_pegawai').val(data.data.id_pegawai);
+                                    $('#nip_pegawai').val(data.data.nip_pegawai);
+                                    $('#nama_pegawai').val(data.data.nama_pegawai);
+                                    $('#id_golongan').val(data.data.id_golongan);
+                                    $('#id_jabatan').val(data.data.id_jabatan);
+                                    $('#id_unit').val(data.data.id_unit);
+                                })
+                            });
 
-            $('.btnDelete').on('click', function() {
+                            $('.btnDelete').on('click', function() {
 
-                var id_pegawai = $(this).data('id_pegawai');                
-                swal({
-                        title: "Apakah anda yakin?",
-                        text: "Pegawai dengan  ID " + id_pegawai + " akan dihapus?",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
+                                var id_pegawai = $(this).data('id_pegawai');
+                                swal({
+                                        title: "Apakah anda yakin?",
+                                        text: "Pegawai dengan  ID " + id_pegawai + " akan dihapus?",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
 
-                            window.location = "/pegawai/delete/" + id_pegawai + "";
+                                            window.location = "/pegawai/delete/" + id_pegawai + "";
 
-                        }
-                    });
+                                        }
+                                    });
 
-            });
-        });
+                            });
+                        });
     </script>
 </body>
 
