@@ -26,10 +26,10 @@ class PegawaiController extends Controller
                 j.nama_jabatan, 
                 u.nama_unit 
             FROM 
-                tb_pegawai AS 
-                p, tb_jabatan AS j, 
-                tb_unit AS u, 
-                tb_golongan AS g
+                tb_pegawai AS p, 
+                tb_golongan AS g,
+                tb_jabatan AS j, 
+                tb_unit AS u 
             WHERE 
                 j.id_jabatan = p.id_jabatan AND
                 g.id_golongan = p.id_golongan AND
@@ -66,6 +66,7 @@ class PegawaiController extends Controller
             'data' => $pegawai
         ]);
     }
+
     function update(Request $r)
     {
         $data = array(
@@ -76,7 +77,7 @@ class PegawaiController extends Controller
             'id_unit' => $r->id_unit
         );
         DB::table('tb_pegawai')->where('id_pegawai', $r->id_pegawai)->update($data);
-        return redirect('/pegawai')->with('success', true)->with('message', 'That was great!');
+        return redirect('/pegawai')->with('success', true)->with('message', 'Data Berhasil Dihapus');
     }
 
     function delete($id)
@@ -88,13 +89,12 @@ class PegawaiController extends Controller
     function datatable()
     {
         $pegawai =  $this->data_pegawai;
-
         return Datatables::of($pegawai)->make(true);
     }
+    
     function cetak()
     {
         $pegawai =  $this->data_pegawai;
-        // dd($pegawai);
         $pdf = PDF::loadview('cetak', ['pegawai'=>$pegawai]);
         return $pdf->stream('laporan-pegawai.pdf');
       
