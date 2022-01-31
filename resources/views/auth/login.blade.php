@@ -16,6 +16,7 @@
 		<div class="text-center">
 			<img src="/images/logo/logo.png" alt="" width="80%">
 		</div>
+		<div class="mb-3"></div>
 		@if ($errors->any())
 		<div id="danger" class="alert alert-danger ">
 			<ul>
@@ -31,19 +32,14 @@
 			{{csrf_field()}}
 			@if (Auth::guest())
 			<label for="username">Username</label>
-			<div class="form-floating">
-				<input name="username" class="form-control" id="username" placeholder="username">
+			<div class="mb-3">
+				<input name="username" class="form-control " id="username" placeholder="username">
 			</div>
 			<label for="password">Password</label>
-			<div class="form-floating">
-				<input name="password" class="form-control" type="password" placeholder="password">
+			<div class=" mb-3">
+				<input name="password" class="form-control " type="password" placeholder="password">
 			</div>
-
-			<div class="checkbox mb-3">
-				<label>
-
-				</label>
-			</div>
+			<div class=" mb-3"></div>
 			<div class="form-group ">
 				<button class="btn btn-primary btn-lg w-100" type="submit">LOGIN</button>
 			</div>
