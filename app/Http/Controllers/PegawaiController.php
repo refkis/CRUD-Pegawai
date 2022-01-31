@@ -47,6 +47,15 @@ class PegawaiController extends Controller
 
     function insert(Request $r)
     {
+
+        $this->validate($r, [
+            'nip_pegawai' => 'required',
+            'nama_pegawai' => 'required',
+            'id_jabatan' => 'required',
+            'id_golongan' => 'required',
+            'id_unit' => 'required'
+
+        ]);
         $data = array(
             'nip_pegawai' => $r->nip_pegawai,
             'nama_pegawai' => $r->nama_pegawai,
@@ -91,12 +100,12 @@ class PegawaiController extends Controller
         $pegawai =  $this->data_pegawai;
         return Datatables::of($pegawai)->make(true);
     }
-    
+
     function cetak()
     {
         $pegawai =  $this->data_pegawai;
-        $pdf = PDF::loadview('cetak', ['pegawai'=>$pegawai]);
-        return $pdf->stream('laporan_pegawai.pdf');
-      
+        $pdf = PDF::loadview('cetak', ['pegawai' => $pegawai]);
+
+        return $pdf->stream(time() . 'laporan_pegawai.pdf');
     }
 }

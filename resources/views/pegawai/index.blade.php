@@ -58,6 +58,17 @@ $golongan = DB::table('tb_golongan')
     </table>
 </div>
 <!-- ALERT SUKSES -->
+<div class="mb-3"></div>
+		@if ($errors->any())
+		<div class="alert alert-danger alert-dismissible fade show ">
+			<ul>
+				@foreach ($errors->all() as $error)
+				<li class="">{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+		@endif
+		</div>
 @if(Session::has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Success!</strong> {{ Session::get('message', '')}}
