@@ -96,7 +96,7 @@ class PegawaiController extends Controller
     {
         $pegawai =  $this->data_pegawai;
         $pdf = PDF::loadview('cetak', ['pegawai'=>$pegawai]);
-        return $pdf->stream('laporan-pegawai.pdf');
+        return $pdf->stream('laporan_pegawai.pdf');
       
     }
 }
