@@ -31,6 +31,9 @@ Simple CRUD data pegawai menggunakan laravel.
 - **php artisan key:generate**
 - **ubah  env sesuai database & user mysql anda**
 - **php artisan serve**
+- **login**
+- admin 123456
+- pegawai 123456
 
 ## Note
 Silahkan dikembangkan sendiri.
