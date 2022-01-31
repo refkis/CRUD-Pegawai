@@ -87,15 +87,15 @@ $golongan = DB::table('tb_golongan')
                 </div>
                 <div class="mb-3">
                     <label for="golongan" class="form-label">GOLONGAN</label><br>
-                    {!! Form::select('id_golongan', $golongan) !!}
+                    {!! Form::select('id_golongan', $golongan,null,['id' => 'id_golongan']) !!}
                 </div>
                 <div class="mb-3">
                     <label for="unit" class="form-label">JABATAN</label><br>
-                    {!! Form::select('id_jabatan', $jabatan) !!}
+                    {!! Form::select('id_jabatan', $jabatan,null,['id' => 'id_jabatan']) !!}
                 </div>
                 <div class="mb-3">
                     <label for="unit" class="form-label">UNIT KERJA</label><br>
-                    {!! Form::select('id_unit', $unit) !!}
+                    {!! Form::select('id_unit', $unit,null,['id' => 'id_unit']) !!}
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -166,6 +166,11 @@ $golongan = DB::table('tb_golongan')
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable();
+        $('#modalTambah').on('show.bs.modal', function() {
+            $('#id_golongan').val("");
+            $('#id_jabatan').val("");
+            $('#id_unit').val("");
+        })
         $('.btnEdit').on('click', function() {
 
             var id = $(this).data('id');
@@ -179,6 +184,7 @@ $golongan = DB::table('tb_golongan')
                 $('#id_jabatan').val(data.data.id_jabatan);
                 $('#id_unit').val(data.data.id_unit);
             })
+
         });
 
         $('.btnDelete').on('click', function() {
