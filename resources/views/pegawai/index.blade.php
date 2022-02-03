@@ -47,7 +47,7 @@ $golongan = DB::table('tb_golongan')
                 <td>{{$p->nama_unit}}</td>
                 @if(auth()->user()->level =='administrator')
                 <td>
-                    <button class="btnEdit btn btn-warning btn-sm" data-id="{{ $p->id_pegawai }}" data-bs-target="#modalEdit" data-bs-toggle="modal" style="width:60px;height:30px;"> EDIT </button>
+                    <button class="btnEdit btn btn-warning btn-sm" data-id_pegawai="{{ $p->id_pegawai }}"  style="width:60px;height:30px;"> EDIT </button>
                     <button class="btnDelete btn btn-sm btn-danger" data-id_pegawai="{{ $p->id_pegawai }}" style="width:60px;height:30px;"> HAPUS </button>
 
                 </td>
@@ -125,7 +125,7 @@ $golongan = DB::table('tb_golongan')
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEditLabel">Tambah Data User</h5>
+                <h5 class="modal-title" id="modalEditLabel">Edit Data User</h5>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
@@ -137,15 +137,15 @@ $golongan = DB::table('tb_golongan')
                     {!! Form::text('nama_pegawai',null,['id'=>'nama_pegawai','class' => 'form-control']) !!}
                 </div>
                 <div class="mb-3">
-                    <label for="golongan" class="form-label">GOLONGAN</label><br>
+                    <label for="id_golongan" class="form-label">GOLONGAN</label><br>
                     {!! Form::select('id_golongan', $golongan,null,['id'=>'id_golongan']) !!}
                 </div>
                 <div class="mb-3">
-                    <label for="unit" class="form-label">JABATAN</label><br>
+                    <label for="id_jabatan" class="form-label">JABATAN</label><br>
                     {!! Form::select('id_jabatan', $jabatan,null,['id'=>'id_jabatan']) !!}
                 </div>
                 <div class="mb-3">
-                    <label for="unit" class="form-label">UNIT KERJA</label><br>
+                    <label for="id_unit" class="form-label">UNIT KERJA</label><br>
                     {!! Form::select('id_unit', $unit,null,['id'=>'id_unit']) !!}
                 </div>
                 {!! Form::hidden('id_pegawai',null,['id'=>'id_pegawai','class' => 'form-control']) !!}
@@ -183,17 +183,19 @@ $golongan = DB::table('tb_golongan')
             $('#id_unit').val("");
         })
         $('.btnEdit').on('click', function() {
-
-            var id = $(this).data('id');
-            console.log(id)
+            var id = $(this).data('id_pegawai');
+            $('#modalEdit').modal('show')
             $.get('pegawai/' + id, function(data) {
+
+                console.log('id golongan = '+data.data.id_golongan)
                 console.log(data.data.nama_pegawai)
                 $('#id_pegawai').val(data.data.id_pegawai);
                 $('#nip_pegawai').val(data.data.nip_pegawai);
                 $('#nama_pegawai').val(data.data.nama_pegawai);
-                $('#id_golongan').val(data.data.id_golongan);
-                $('#id_jabatan').val(data.data.id_jabatan);
-                $('#id_unit').val(data.data.id_unit);
+
+                $('#modalEdit #id_golongan').val(data.data.id_golongan);
+                $('#modalEdit #id_jabatan').val(data.data.id_jabatan);
+                $('#modalEdit #id_unit').val(data.data.id_unit);
             })
 
         });

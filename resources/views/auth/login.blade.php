@@ -48,7 +48,7 @@
 		@endif
 		@if (Auth::user())
 		<label>Selamat datang <b>{{auth()->user()->username}}</b></label><br>
-		<a href="/" span>Halaman Depan</span></a><br>
+		<a href="/pegawai" span>Dashboard</span></a><br>
 		<a href="/logout" method="post">Logout</a><br>
 		@endif
 

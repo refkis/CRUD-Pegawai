@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 
 Route::post('/postlogin','AuthController@postlogin' );
-Route::get('/login','AuthController@login' );
+Route::get('/login','AuthController@login' )->name('login') ;
 Route::get('/logout','AuthController@logout' );
 
-Route::prefix('pegawai')->group(function () {
+Route::prefix('pegawai')->middleware('auth')->group(function () {
     Route::get('/', 'PegawaiController@index');
     Route::get('/dt', 'PegawaiController@datatable');
     Route::get('/cetak', 'PegawaiController@cetak');
