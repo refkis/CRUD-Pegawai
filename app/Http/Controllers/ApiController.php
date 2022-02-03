@@ -36,17 +36,54 @@ class ApiController extends Controller
     }
     function get_data()
     {
-        $pegawai =  $this->data_pegawai;
+        // $pegawai =  $this->data_pegawai;
+
+        // $respon = array(
+        //     'status' => true,
+        //     'data' => $pegawai,
+        // );
+
+        // $response = new Response(json_encode($respon));
+        // $response->headers->set('Content-Type', 'application/json');
+        // return $response;
+
+        
+        $sql =
+            'SELECT 
+                p.id_pegawai, 
+                p.nip_pegawai,
+                p.nama_pegawai, 
+                g.pangkat,
+                g.id_golongan as valueGolongan,
+                CONCAT(g.romawi,"", g.ruang) as labelGolongan, 
+                j.id_jabatan as valueJabatan, 
+                j.nama_jabatan as labelJabatan, 
+                u.id_unit as valueUnit,
+                u.nama_unit as labelUnit
+            FROM 
+                tb_pegawai AS p, 
+                tb_golongan AS g,
+                tb_jabatan AS j, 
+                tb_unit AS u 
+            WHERE 
+                j.id_jabatan = p.id_jabatan AND
+                g.id_golongan = p.id_golongan AND
+                u.id_unit = p.id_unit ';
+
+        $data = DB::table(DB::raw("($sql ) as x"))
+            ->get();
 
         $respon = array(
             'status' => true,
-            'data' => $pegawai,
+            'data' => $data
+
         );
 
         $response = new Response(json_encode($respon));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+    
 
     function get_id(Request $r)
     {
