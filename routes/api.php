@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 Route::group(['prefix'=>'pegawai'], function(){
     Route::get('/all','ApiController@get_data');
     Route::get('/id/','ApiController@get_id');
@@ -23,3 +23,7 @@ Route::group(['prefix'=>'pegawai'], function(){
     Route::get('/list','ApiController@get_list');
     Route::post('/update/','ApiController@update');
 });
+
+Route::post('login','AuthApiController@postLogin');
+
+
