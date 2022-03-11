@@ -69,12 +69,7 @@ $golongan = DB::table('tb_golongan')
 		</div>
 		@endif
 		</div>
-@if(Session::has('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> {{ Session::get('message', '')}}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
+
 @endsection
 
 @section('modal')
@@ -172,7 +167,15 @@ $golongan = DB::table('tb_golongan')
 <script src="{{url('js/datatables.js')}}"></script>
 <script src="{{url('js/sweetalert.js')}}"></script>
 <script src="{{url('js/bootstrap513.js')}}"></script>
-
+@if(Session::has('success'))
+<script>
+   swal({
+                    title: "Sukses !!!",
+                    text: "{!! Session::get('message') !!}",
+                    icon: "success",
+                });
+</script>
+@endif
 
 <script>
     $(document).ready(function() {
