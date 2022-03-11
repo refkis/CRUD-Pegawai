@@ -57,6 +57,7 @@ $golongan = DB::table('tb_golongan')
         </tbody>
     </table>
 </div>
+
 <!-- ALERT SUKSES -->
 <div class="mb-3"></div>
 		@if ($errors->any())
@@ -176,7 +177,14 @@ $golongan = DB::table('tb_golongan')
                 });
 </script>
 @endif
-
+@if (Session::has('info'))
+<script>
+  swal({
+    title: "{!! Session::get('info') !!}",
+    icon: "info",
+      });
+</script>
+@endif
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable();

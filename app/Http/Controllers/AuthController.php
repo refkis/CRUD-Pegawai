@@ -21,7 +21,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($r->only('username', 'password'))) {
-            return redirect('/pegawai')->with('success', 'Selamat Datang');
+            return redirect('/pegawai')->with('info', 'Welcome back !!!');
         } else {
             return redirect('/login')->with('error', 'username atau password ada yang salah');
         }
